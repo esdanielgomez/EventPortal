@@ -1,0 +1,189 @@
+﻿@viewModel EventPortal.PL.ViewModels.DefaultViewModel, EventPortal.PL
+@masterPage Views/MasterPage.dotmaster
+<dot:Content ContentPlaceHolderID="MainContent">
+
+	<!-- ======= Intro Section ======= -->
+	<section id="intro">
+		<div class="intro-container" data-aos="zoom-in" data-aos-delay="100">
+			<h1 class="mb-4 pb-0"><br><span>{{value: Event.Name}}</span></h1>
+				<a href="#about" class="about-btn scrollto">About the event</a>
+</div>
+	</section>
+	<!-- End Intro Section -->
+
+	<main id="main">
+
+		<!-- ======= About Section ======= -->
+		<section id="about">
+			<div class="container" data-aos="fade-up">
+				<div class="row">
+					<div class="col-lg-6">
+						<h2>About the event</h2>
+						<p>
+							{{value: Event.Description}}
+						</p>
+					</div>
+					<div class="col-lg-3">
+						<h3>Where</h3>
+						<p>Global</p>
+					</div>
+					<div class="col-lg-3">
+						<h3>When</h3>
+						<p>Date<br> Hour</p>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- End About Section -->
+		
+		<!-- ======= Schedule Section ======= -->
+		<section id="schedule" class="section-with-bg">
+			<div class="container" data-aos="fade-up">
+				<div class="section-header">
+					<h2>EVENT SCHEDULE</h2>
+					<p>Here's our calendar of the event</p>
+				</div>
+
+				<ul class="nav nav-tabs" role="tablist" data-aos="fade-up" data-aos-delay="100">
+					<li class="nav-item">
+						<a class="nav-link active" href="#day-1" role="tab" data-toggle="tab">Day 1</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#day-2" role="tab" data-toggle="tab">Day 2</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#day-3" role="tab" data-toggle="tab">Day 3</a>
+					</li>
+				</ul>
+
+				<h3 class="sub-heading">
+					These are our sessions:
+				</h3>
+
+				<dot:Repeater DataSource="{value: Calendar}" class="tab-content row justify-content-center" data-aos="fade-up" data-aos-delay="200">
+					<ItemTemplate>
+						<div role="tabpanel" html:id="{{value: NumberOfDayRef}}" class="{{value: Css}}">
+							<dot:Repeater DataSource="{value: Sessions}" class="row schedule-item">
+								<ItemTemplate>
+									<div class="col-md-2"><time><b>{{value: StartDate.Value.ToString("hh:mm tt")}}</b></time></div>
+									<div class="col-md-10">
+										<div class="speaker">
+											<img src="assets/img/speakers/1.png" alt="{{value: SpeakerString}}">
+										</div>
+										<h4>{{value: Name}}.</h4>
+										<span>{{value: SpeakerString}}.</span>
+										<p>{{value: NameSessionType}}.</p>
+										<p><br /></p>
+									</div>
+								</ItemTemplate>
+							</dot:Repeater>
+						</div>
+					</ItemTemplate>
+				</dot:Repeater>
+			</div>
+
+		</section>
+		<!-- End Schedule Section -->
+		
+		<!-- ======= Organizer Section ======= -->
+		<section id="organizers">
+			<div class="container" data-aos="fade-up">
+				<div class="section-header">
+					<h2>ORGANIZERS</h2>
+					<p>Here are the organizing communities: </p>
+				</div>
+
+				<dot:Repeater DataSource="{value: Organizers}" class="row">
+					<ItemTemplate>
+						<div class="col-lg-4 col-md-6">
+							<div class="speaker" data-aos="fade-up" data-aos-delay="100">
+								<img src="{{value: LogoLink}}" alt="{{value: Name}}" class="img-fluid">
+								<div class="details">
+									<h3><a href="{{value: FacebookLink}}" target="_blank">{{value: Name}}</a></h3>
+									<p>{{value: Description}}</p>
+									<div class="social">
+										<a href="{{value: TwitterLink}}" target="_blank"><i class="fa fa-twitter"></i></a>
+										<a href="{{value: FacebookLink}}"><i class="fa fa-facebook" target="_blank"></i></a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</ItemTemplate>
+				</dot:Repeater>
+			</div>
+
+		</section>
+		<!-- End Organizer Section -->
+		
+		<!-- ======= Supporters Section ======= -->
+		<section id="supporters" class="section-with-bg">
+
+			<div class="container" data-aos="fade-up">
+				<div class="section-header">
+					<h2>SPONSORS</h2>
+					<p>Here are our dear sponsors:</p>
+				</div>
+
+				<dot:Repeater DataSource="{value: Sponsors}" class="row no-gutters supporters-wrap clearfix" data-aos="zoom-in" data-aos-delay="100">
+					<ItemTemplate>
+						<div class="col-lg-3 col-md-4 col-xs-6">
+							<div class="supporter-logo">
+								<a href="{{value: WebPage}}" target="_blank">
+									<img src="{{value: LogoLink}}" class="img-fluid" alt="{{value: Name}}">
+								</a>
+							</div>
+						</div>
+					</ItemTemplate>
+				</dot:Repeater>
+
+			</div>
+
+		</section>
+		<!-- End Sponsors Section -->
+		
+		<!-- ======= Registration Section ======= -->
+		<section id="registration">
+			<div class="container" data-aos="zoom-in">
+				<div class="section-header">
+					<h2>REGISTRATION</h2>
+					<p>Live a unique and amazing experience!</p>
+				</div>
+
+				<form method="POST" action="{{value: Event.RegistrationLink}}">
+					<div class="form-row justify-content-center">
+						<div class="col-auto">
+							<button type="submit">Register</button>
+						</div>
+					</div>
+				</form>
+
+			</div>
+		</section>
+		<!-- End Registation Section -->
+		
+		<!-- ======= Contact Section ======= -->
+		<section id="contact" class="section-bg">
+
+			<div class="container" data-aos="fade-up">
+
+				<div class="section-header">
+					<h2>CONTACT</h2>
+					<p>Contact us at any time</p>
+
+					<div class="col-md-12">
+						<div class="contact-email">
+							<i class="ion-ios-email-outline"></i>
+							<h4><p><a href="mailto:mail@mail.com">mail@mail.com</a></p></h4>
+						</div>
+					</div>
+				</div>
+
+
+
+			</div>
+		</section>
+		<!-- End Contact Section -->
+
+	</main>
+
+</dot:Content>
